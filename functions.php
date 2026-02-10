@@ -18,6 +18,20 @@ include_once( 'inc/core.php' ); // 核心
 include_once( 'inc/base-customized.php' ); // 定制优化
 
 // 挂载脚本
+function wing_enable_note_admin_ui( $args, $post_type ) {
+    if ( 'note' !== $post_type ) {
+        return $args;
+    }
+
+    $args['show_ui']           = true;
+    $args['show_in_menu']      = true;
+    $args['show_in_admin_bar'] = true;
+
+    return $args;
+}
+
+add_filter( 'register_post_type_args', 'wing_enable_note_admin_ui', 10, 2 );
+
 function biji_enqueue_scripts() {
     // WP自带图标
     wp_enqueue_style( 'dashicons' );
